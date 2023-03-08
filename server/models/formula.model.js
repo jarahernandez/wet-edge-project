@@ -9,7 +9,7 @@ const FormulaSchema = new mongoose.Schema({
     formulaImage: {
         type:String
     },
-    materialsNeeded: [{}]
+    materialsNeeded: {}
 }, {minimize:false, timestamps:true})
 
 const Formula = mongoose.model('Formula', FormulaSchema);

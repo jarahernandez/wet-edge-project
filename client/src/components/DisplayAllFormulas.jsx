@@ -1,16 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const DisplayAllFormulas = (props) => {
 
-    const [formulas, setFormulas] = useState([]);
+    const {formulas, setFormulas} = props;
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/allFormulas')
             .then(allFormulas => {
                 // console.log(allFormulas.data);
                 setFormulas(allFormulas.data);
+                console.log(formulas);
             })
             .catch(err => console.log(err))
     }, [])
@@ -28,8 +29,8 @@ const DisplayAllFormulas = (props) => {
                         <h3>{formula.formulaImage}</h3>
                         <div>
                             {
-                                Object.entries(formula.materialsNeeded).map((value, key) => (
-                                    <p key={key}>{value[0]} : {value[1]}</p>
+                                Object.values(formula.materialsNeeded).map((value, key) => (
+                                    <p key={key}>{value}</p>
                                 ))
                             }
                         </div>
