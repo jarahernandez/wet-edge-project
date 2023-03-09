@@ -9,9 +9,7 @@ const DisplayAllFormulas = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/allFormulas')
             .then(allFormulas => {
-                // console.log(allFormulas.data);
                 setFormulas(allFormulas.data);
-                console.log(formulas);
             })
             .catch(err => console.log(err))
     }, [])
@@ -20,7 +18,7 @@ const DisplayAllFormulas = (props) => {
         <div>
             <div>
                 <h1>Wet Edge Formulas</h1>
-                <Link to={`/formulas/new`}><button>Create Formula</button></Link>
+                <Link to={`/formula/new`}><button>Create Formula</button></Link>
             </div>
             {
                 formulas.map(formula => (
@@ -30,11 +28,11 @@ const DisplayAllFormulas = (props) => {
                         <div>
                             {
                                 Object.values(formula.materialsNeeded).map((value, key) => (
-                                    <p key={key}>{value}</p>
+                                    <p key={key}>{value.name} : {value.amount}</p>
                                 ))
                             }
                         </div>
-                        <Link to={`/`}><button>Use</button></Link>
+                        <Link to={`/formula/${formula._id}/use`}><button>Use</button></Link>
                         <hr />
                     </div>
                 ))

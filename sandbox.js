@@ -1,20 +1,20 @@
 
-const formula = {
-    name: "Luna Quartz Aruba",
-    image: "Some image",
-    materials: {
-        oysterWhite: 14,
-        blueT: 1,
-        blackT: 1,
-        whiteCement: 4,
-        arubaPig: 1
-    }
-}
+// const formula = {
+//     name: "Luna Quartz Aruba",
+//     image: "Some image",
+//     materials: {
+//         oysterWhite: 14,
+//         blueT: 1,
+//         blackT: 1,
+//         whiteCement: 4,
+//         arubaPig: 1
+//     }
+// }
 
 
 // const materialsValues = Object.values(formula.materials)
 
-// const numOfBatches = 10
+const numOfBatches = 10
 
 // const batches = materialsValues.map((material) => (material*numOfBatches))
 
@@ -29,7 +29,7 @@ const formula = {
 //     ))
 // }
 
-console.log('hola'+1);
+// console.log('hola'+1);
 
     // const [materialsObj, setMaterialsObj] = useState({})
     // const [entry, setEntry] = useState(0);
@@ -59,3 +59,27 @@ console.log('hola'+1);
     // const materialsChangeHandler = (e) => {
     //     setMaterialsObj({...materialsObj, [e.target.name=e.target.value]:})
     // }
+
+const obj = {
+    name: "serenity",
+    image: "image.png",
+    materials: {
+        material1: {
+            name: "oyster",
+            amount: 14
+        },
+        material2: {
+            name: "greystone",
+            amount: 20
+        }
+    }
+}
+
+console.log(Object.values(obj.materials));
+
+
+Object.values(obj.materials).map((value, key) => {
+    console.log(value.name);
+    console.log(value.amount);
+    console.log(value.amount*numOfBatches);
+})
