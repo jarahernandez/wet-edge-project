@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
+import FileBase64 from 'react-file-base64';
 
 const CreateFormula = (props) => {
 
@@ -59,8 +60,13 @@ const CreateFormula = (props) => {
                         <input type="text" name='formulaName' onChange={changeHandler}/>
                     </div>
                     <div>
-                        <label>Formula Image:</label>
-                        <input type="text" name='formulaImage' onChange={changeHandler}/>
+                        {/* <label>Formula Image:</label>
+                        <input type="text" name='formulaImage' onChange={changeHandler}/> */}
+                        <FileBase64
+                            multiple={false}
+                            onDone={({ base64 }) => {
+                                setFormula({...formula, formulaImage: base64})
+                            }}/>
                     </div>
                 </section>
                 <section>

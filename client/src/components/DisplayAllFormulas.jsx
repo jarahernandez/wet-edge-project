@@ -24,7 +24,7 @@ const DisplayAllFormulas = (props) => {
                 formulas.map(formula => (
                     <div key={formula._id}>
                         <h3>{formula.formulaName}</h3>
-                        <h3>{formula.formulaImage}</h3>
+                        <img style={{width:'150px'}} src={formula.formulaImage} alt="Formula" />
                         <div>
                             {
                                 Object.values(formula.materialsNeeded).map((value, key) => (

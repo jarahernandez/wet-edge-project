@@ -17,15 +17,14 @@ const UseFormula = (props) => {
             .catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, [id])
 
     const changeHandler = (e) => {
         setBatches(e.target.value)
     }
-
+    
     const clickHandler = (e) => {
         e.preventDefault();
-
         setLoading(false)
     }
 
@@ -37,7 +36,7 @@ const UseFormula = (props) => {
             </div>
             <div>
                 <h2>{formula.formulaName}</h2>
-                <h2>{formula.formulaImage}</h2>
+                <img src={formula.formulaImage} alt='Formula' />
                 <form>
                     <label>Batches:</label>
                     <input type="number" onChange={changeHandler}/>
