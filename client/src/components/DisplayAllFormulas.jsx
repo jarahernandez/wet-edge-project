@@ -33,6 +33,7 @@ const DisplayAllFormulas = (props) => {
                             }
                         </div>
                         <Link to={`/formula/${formula._id}/use`}><button>Use</button></Link>
+                        <Link to={`/formula/${formula._id}/edit`}><button>Edit</button></Link>
                         <hr />
                     </div>
                 ))
