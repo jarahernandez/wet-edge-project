@@ -90,33 +90,33 @@ const UpdateFormula = (props) => {
 
     return (
         <div>
-            <div>
+            <div className='d-flex justify-content-around align-items-center p-3 pb-5 text-light'>
                 <h1>Wet Edge Formulas</h1>
-                <Link to={`/`}><button>Back</button></Link>
+                <Link to={`/`}><button className='btn btn-secondary'>Home</button></Link>
             </div>
             <div>
                 {
                     loading ?
-                        <div>
+                        <div className='text-light fs-3 my-5 py-5'>
                             <p>Are you sure you want make changes to "{formulaName}"?</p>
-                            <button onClick={clickHandler}>Yes</button>
-                            <Link to={'/'}><button>No</button></Link>
+                            <button className='btn btn-secondary me-2' onClick={clickHandler}>Yes</button>
+                            <Link to={'/'}><button className='btn btn-secondary ms-2'>No</button></Link>
                         </div>
                         :
-                        <div>
-                            <h2>Editing: {formulaName}</h2>
-                            <form onSubmit={submitHandler}>
+                        <div className='text-light'>
+                            <h2 className='my-4'>Editing: {formulaName}</h2>
+                            <form className='d-flex flex-column text-light align-items-center' onSubmit={submitHandler}>
                                 <section>
                                     <div>
-                                        <label>Formula Name:</label>
-                                        <input type="text" name='formulaName' onChange={changeHandler} value={formula.formulaName}/>
+                                        <label className='form-label mt-3'>Formula Name:</label>
+                                        <input className='form-control text-light bg-black bg-opacity-10' type="text" name='formulaName' onChange={changeHandler} value={formula.formulaName}/>
                                         {
                                             errors.formulaName?
-                                            <p>{errors.formulaName.message}</p>:null
+                                            <p className='text-danger mb-4'>{errors.formulaName.message}</p>:null
                                         }
                                     </div>
-                                    <div>
-                                        <img style={{ width: '150px' }} src={formula.formulaImage} alt="Formula" />
+                                    <div className='d-flex flex-column align-items-center'>
+                                        <img className='rounded-4 mb-2 mt-5' style={{ width: '150px' }} src={formula.formulaImage} alt="Formula" />
                                         <FileBase64
                                             multiple={false}
                                             onDone={({ base64 }) => {
@@ -124,71 +124,74 @@ const UpdateFormula = (props) => {
                                             }} />
                                         {
                                             errors.formulaImage?
-                                            <p>{errors.formulaImage.message}</p>:null
+                                            <p className='text-danger mb-4'>{errors.formulaImage.message}</p>:null
                                         }
                                     </div>
                                 </section>
                                 <section>
+                                    <h2 className='mt-4'>Materials Needed</h2>
                                     {
                                         formula.materialsNeeded.material1?
-                                        <div>
-                                            <h2>Materials Needed</h2>
-                                            <label>1. </label>
-                                            <input type="text" name="name" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.name}/>
-                                            <input type="number" name="amount" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.amount}/>
-                                            <button name="material1" onClick={editClickHandler}>Edit</button>
+                                        <div className='d-flex mb-2'>
+                                            <label className='fs-4 me-2'>1. </label>
+                                            <input className='form-control me-2 text-light bg-black bg-opacity-10' type="text" name="name" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.name}/>
+                                            <input className='form-control text-light bg-black bg-opacity-10' type="number" name="amount" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.amount}/>
+                                            <button className='btn btn-secondary ms-2' name="material1" onClick={editClickHandler}>Edit</button>
                                         </div>
                                         :
                                         null
                                     }
                                     {
                                         formula.materialsNeeded.material2?
-                                        <div>
-                                            <label>2. </label>
-                                            <input type="text" name="name" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.name}/>
-                                            <input type="number" name="amount" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.amount}/>
-                                            <button name="material2" onClick={editClickHandler}>Edit</button>
+                                        <div className='d-flex mb-2'>
+                                            <label className='fs-4 me-2'>2. </label>
+                                            <input className='form-control me-2 text-light bg-black bg-opacity-10' type="text" name="name" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.name}/>
+                                            <input className='form-control text-light bg-black bg-opacity-10' type="number" name="amount" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.amount}/>
+                                            <button className='btn btn-secondary ms-2' name="material2" onClick={editClickHandler}>Edit</button>
                                         </div>
                                         :
                                         null
                                     }
                                     {
                                         formula.materialsNeeded.material3?
-                                        <div>
-                                            <label>3. </label>
-                                            <input type="text" name="name" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.name}/>
-                                            <input type="number" name="amount" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.amount}/>
-                                            <button name="material3" onClick={editClickHandler}>Edit</button>
+                                        <div className='d-flex mb-2'>
+                                            <label className='fs-4 me-2'>3. </label>
+                                            <input className='form-control me-2 text-light bg-black bg-opacity-10' type="text" name="name" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.name}/>
+                                            <input className='form-control text-light bg-black bg-opacity-10' type="number" name="amount" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.amount}/>
+                                            <button className='btn btn-secondary ms-2' name="material3" onClick={editClickHandler}>Edit</button>
                                         </div>
                                         :
                                         null
                                     }
                                     {
                                         formula.materialsNeeded.material4?
-                                        <div>
-                                            <label>4. </label>
-                                            <input type="text" name="name" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.name}/>
-                                            <input type="number" name="amount" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.amount}/>
-                                            <button name="material4" onClick={editClickHandler}>Edit</button>
+                                        <div className='d-flex mb-2'>
+                                            <label className='fs-4 me-2'>4. </label>
+                                            <input className='form-control me-2 text-light bg-black bg-opacity-10' type="text" name="name" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.name}/>
+                                            <input className='form-control text-light bg-black bg-opacity-10' type="number" name="amount" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.amount}/>
+                                            <button className='btn btn-secondary ms-2' name="material4" onClick={editClickHandler}>Edit</button>
                                         </div>
                                         :
                                         null
                                     }
                                     {
                                         formula.materialsNeeded.material5?
-                                        <div>
-                                            <label>5. </label>
-                                            <input type="text" name="name" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.name}/>
-                                            <input type="number" name="amount" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.amount}/>
-                                            <button name="material5" onClick={editClickHandler}>Edit</button>
+                                        <div className='d-flex mb-2'>
+                                            <label className='fs-4 me-2'>5. </label>
+                                            <input className='form-control me-2 text-light bg-black bg-opacity-10' type="text" name="name" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.name}/>
+                                            <input className='form-control text-light bg-black bg-opacity-10' type="number" name="amount" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.amount}/>
+                                            <button className='btn btn-secondary ms-2' name="material5" onClick={editClickHandler}>Edit</button>
                                         </div>
                                         :
                                         null
                                     }
                                     {/* <button onClick={saveMaterialsHandler}>Save Materials</button> */}
+                                    <hr />
                                 </section>
-                                <input type="submit" value="Update Formula" />
-                                <button onClick={deleteHandler}>Delete Formula</button>
+                                <div>
+                                    <input className='btn btn-primary me-2' type="submit" value="Update Formula" />
+                                    <button className='btn btn-danger ms-2' onClick={deleteHandler}>Delete Formula</button>
+                                </div>
                             </form>
                         </div>
                 }

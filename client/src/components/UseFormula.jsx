@@ -30,25 +30,25 @@ const UseFormula = (props) => {
 
     return (
         <div>
-            <div>
+            <div className='d-flex justify-content-around align-items-center p-3 pb-5 text-light'>
                 <h1>Wet Edge Formulas</h1>
-                <Link to={`/`}><button>Back</button></Link>
+                <Link to={`/`}><button className='btn btn-secondary'>Home</button></Link>
             </div>
-            <div>
-                <h2>{formula.formulaName}</h2>
-                <img src={formula.formulaImage} alt='Formula' />
-                <form>
-                    <label>Batches:</label>
-                    <input type="number" onChange={changeHandler}/>
-                    <button onClick={clickHandler}>Calculate</button>
+            <div className='text-light'>
+                <h2 className='mb-4'>{formula.formulaName}</h2>
+                <img className='rounded-4 mb-5' src={formula.formulaImage} alt='Formula' />
+                <form className='d-flex justify-content-center mb-5'>
+                    <label className='fs-5 form-label me-2'>Batches:</label>
+                    <input className='form-control w-25 me-2 text-light bg-black bg-opacity-10' type="number" onChange={changeHandler}/>
+                    <button className='btn btn-secondary' onClick={clickHandler}>Calculate</button>
                 </form>
-                <div>
+                <div className='fs-4'>
                     {
                         loading?
                         null
                         :
                         Object.values(formula.materialsNeeded).map((value,key) =>(
-                            <p key={key}>{value.name} : {(value.amount*batches)}</p>
+                            <p key={key}>{value.name} : {(value.amount*batches)} bags</p>
                         ))
                     }
                 </div>
