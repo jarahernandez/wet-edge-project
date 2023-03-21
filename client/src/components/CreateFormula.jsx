@@ -14,6 +14,8 @@ const CreateFormula = (props) => {
     const [materials, setMaterials] = useState({});
     const {formulas, setFormulas} = props;
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(false)
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -24,7 +26,8 @@ const CreateFormula = (props) => {
                 navigate('/');
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.response.data.errors);
+                setErrors(err.response.data.errors)
             })
     }
 
@@ -44,6 +47,7 @@ const CreateFormula = (props) => {
     const saveMaterialsHandler = (e) => {
         e.preventDefault();
         setFormula({...formula, materialsNeeded:materials})
+        setIsDisabled(true)
     }
 
     return (
@@ -58,6 +62,10 @@ const CreateFormula = (props) => {
                     <div>
                         <label>Formula Name:</label>
                         <input type="text" name='formulaName' onChange={changeHandler}/>
+                        {
+                            errors.formulaName?
+                            <p>{errors.formulaName.message}</p>:null
+                        }
                     </div>
                     <div>
                         {/* <label>Formula Image:</label>
@@ -67,43 +75,47 @@ const CreateFormula = (props) => {
                             onDone={({ base64 }) => {
                                 setFormula({...formula, formulaImage: base64})
                             }}/>
+                        {
+                            errors.formulaImage?
+                            <p>{errors.formulaImage.message}</p>:null
+                        }
                     </div>
                 </section>
                 <section>
                     <h2>Materials Needed</h2>
                     <div>
                         <label>1. </label>
-                        <input type="text" name="name" onChange={materialChangeHandler}/>
-                        <input type="number" name="amount" onChange={materialChangeHandler}/>
-                        <button name="material1" onClick={materialsClickHandler}>Add</button>
+                        <input type="text" name="name" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <input type="number" name="amount" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <button name="material1" onClick={materialsClickHandler} disabled={isDisabled}>Add</button>
                     </div>
                     <div>
                         <label>2. </label>
-                        <input type="text" name="name" onChange={materialChangeHandler}/>
-                        <input type="number" name="amount" onChange={materialChangeHandler}/>
-                        <button name="material2" onClick={materialsClickHandler}>Add</button>
+                        <input type="text" name="name" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <input type="number" name="amount" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <button name="material2" onClick={materialsClickHandler} disabled={isDisabled}>Add</button>
                     </div>
                     <div>
                         <label>3. </label>
-                        <input type="text" name="name" onChange={materialChangeHandler}/>
-                        <input type="number" name="amount" onChange={materialChangeHandler}/>
-                        <button name="material3" onClick={materialsClickHandler}>Add</button>
+                        <input type="text" name="name" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <input type="number" name="amount" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <button name="material3" onClick={materialsClickHandler} disabled={isDisabled}>Add</button>
                     </div>
                     <div>
                         <label>4. </label>
-                        <input type="text" name="name" onChange={materialChangeHandler}/>
-                        <input type="number" name="amount" onChange={materialChangeHandler}/>
-                        <button name="material4" onClick={materialsClickHandler}>Add</button>
+                        <input type="text" name="name" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <input type="number" name="amount" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <button name="material4" onClick={materialsClickHandler} disabled={isDisabled}>Add</button>
                     </div>
                     <div>
                         <label>5. </label>
-                        <input type="text" name="name" onChange={materialChangeHandler}/>
-                        <input type="number" name="amount" onChange={materialChangeHandler}/>
-                        <button name="material5" onClick={materialsClickHandler}>Add</button>
+                        <input type="text" name="name" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <input type="number" name="amount" onChange={materialChangeHandler} disabled={isDisabled}/>
+                        <button name="material5" onClick={materialsClickHandler} disabled={isDisabled}>Add</button>
                     </div>
                     <button onClick={saveMaterialsHandler}>Save Materials</button>
                 </section>
-                <input type="submit" value="Create"/>
+                <input type="submit" value="Create Formula"/>
             </form>
         </div>
 )}

@@ -8,7 +8,7 @@ module.exports = {
                 res.json(allFormulas);
             })
             .catch(err => {
-                res.status(500).json({message: 'Something went wrong', error:err});
+                res.status(500).json(err);
             })
     },
 
@@ -18,7 +18,7 @@ module.exports = {
                 res.json(newFormula);
             })
             .catch(err => {
-                res.status(500).json({message: 'Something went wrong', error:err});
+                res.status(500).json(err);
             })
     },
 
@@ -28,7 +28,7 @@ module.exports = {
                 res.json(oneFormula);
             })
             .catch(err => {
-                res.status(500).json({message: 'Something went wrong', error:err});
+                res.status(500).json(err);
             })
     },
 
@@ -38,7 +38,7 @@ module.exports = {
                 res.json(updatedFormula);
             })
             .catch(err => {
-                res.status(500).json({message: 'Something went wrong', error:err});
+                res.status(500).json(err);
             })
     },
 

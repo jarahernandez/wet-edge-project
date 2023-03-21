@@ -16,6 +16,7 @@ const UpdateFormula = (props) => {
     const [material, setMaterial] = useState({});
     const [materials, setMaterials] = useState({});
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/oneFormula/' + id)
@@ -27,17 +28,18 @@ const UpdateFormula = (props) => {
             .catch(err => {
                 console.log(err);
             })
-    }, [id])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        axios.put(`http://localhost:8000/api/updateFormula/${id}`, formula)
+        }, [id])
+        
+        const submitHandler = (e) => {
+            e.preventDefault();
+            
+            axios.put(`http://localhost:8000/api/updateFormula/${id}`, formula)
             .then(res => {
                 navigate('/');
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.response.data.errors);
+                setErrors(err.response.data.errors)
             })
     }
 
@@ -76,6 +78,16 @@ const UpdateFormula = (props) => {
     //     setFormula({...formula, materialsNeeded:materials})
     // }
 
+    const deleteHandler = () => {
+        axios.delete(`http://localhost:8000/api/deleteFormula/${id}`)
+            .then(res => {
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <div>
             <div>
@@ -98,6 +110,10 @@ const UpdateFormula = (props) => {
                                     <div>
                                         <label>Formula Name:</label>
                                         <input type="text" name='formulaName' onChange={changeHandler} value={formula.formulaName}/>
+                                        {
+                                            errors.formulaName?
+                                            <p>{errors.formulaName.message}</p>:null
+                                        }
                                     </div>
                                     <div>
                                         <img style={{ width: '150px' }} src={formula.formulaImage} alt="Formula" />
@@ -106,58 +122,73 @@ const UpdateFormula = (props) => {
                                             onDone={({ base64 }) => {
                                                 setFormula({ ...formula, formulaImage: base64 })
                                             }} />
+                                        {
+                                            errors.formulaImage?
+                                            <p>{errors.formulaImage.message}</p>:null
+                                        }
                                     </div>
                                 </section>
                                 <section>
-                                    <h2>Materials Needed</h2>
-                                    <div>
-                                        <label>1. </label>
-                                        <input type="text" name="name" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.name}/>
-                                        <input type="number" name="amount" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.amount}/>
-                                        <button name="material1" onClick={editClickHandler}>Edit</button>
-                                    </div>
-                                    <div>
-                                        <label>2. </label>
-                                        <input type="text" name="name" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.name}/>
-                                        <input type="number" name="amount" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.amount}/>
-                                        <button name="material2" onClick={editClickHandler}>Edit</button>
-                                    </div>
+                                    {
+                                        formula.materialsNeeded.material1?
+                                        <div>
+                                            <h2>Materials Needed</h2>
+                                            <label>1. </label>
+                                            <input type="text" name="name" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.name}/>
+                                            <input type="number" name="amount" id="material1" onChange={cchcch} value={formula.materialsNeeded.material1.amount}/>
+                                            <button name="material1" onClick={editClickHandler}>Edit</button>
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                    {
+                                        formula.materialsNeeded.material2?
+                                        <div>
+                                            <label>2. </label>
+                                            <input type="text" name="name" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.name}/>
+                                            <input type="number" name="amount" id="material2" onChange={cchcch} value={formula.materialsNeeded.material2.amount}/>
+                                            <button name="material2" onClick={editClickHandler}>Edit</button>
+                                        </div>
+                                        :
+                                        null
+                                    }
                                     {
                                         formula.materialsNeeded.material3?
-                                            <div>
-                                                <label>3. </label>
-                                                <input type="text" name="name" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.name}/>
-                                                <input type="number" name="amount" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.amount}/>
-                                                <button name="material3" onClick={editClickHandler}>Edit</button>
-                                            </div>
-                                            :
-                                            null
+                                        <div>
+                                            <label>3. </label>
+                                            <input type="text" name="name" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.name}/>
+                                            <input type="number" name="amount" id="material3" onChange={cchcch} value={formula.materialsNeeded.material3.amount}/>
+                                            <button name="material3" onClick={editClickHandler}>Edit</button>
+                                        </div>
+                                        :
+                                        null
                                     }
                                     {
                                         formula.materialsNeeded.material4?
-                                            <div>
-                                                <label>4. </label>
-                                                <input type="text" name="name" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.name}/>
-                                                <input type="number" name="amount" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.amount}/>
-                                                <button name="material4" onClick={editClickHandler}>Edit</button>
-                                            </div>
-                                            :
-                                            null
+                                        <div>
+                                            <label>4. </label>
+                                            <input type="text" name="name" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.name}/>
+                                            <input type="number" name="amount" id="material4" onChange={cchcch} value={formula.materialsNeeded.material4.amount}/>
+                                            <button name="material4" onClick={editClickHandler}>Edit</button>
+                                        </div>
+                                        :
+                                        null
                                     }
                                     {
                                         formula.materialsNeeded.material5?
-                                            <div>
-                                                <label>5. </label>
-                                                <input type="text" name="name" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.name}/>
-                                                <input type="number" name="amount" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.amount}/>
-                                                <button name="material5" onClick={editClickHandler}>Edit</button>
-                                            </div>
-                                            :
-                                            null
+                                        <div>
+                                            <label>5. </label>
+                                            <input type="text" name="name" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.name}/>
+                                            <input type="number" name="amount" id="material5" onChange={cchcch} value={formula.materialsNeeded.material5.amount}/>
+                                            <button name="material5" onClick={editClickHandler}>Edit</button>
+                                        </div>
+                                        :
+                                        null
                                     }
                                     {/* <button onClick={saveMaterialsHandler}>Save Materials</button> */}
                                 </section>
-                                <input type="submit" value="Submit Changes" />
+                                <input type="submit" value="Update Formula" />
+                                <button onClick={deleteHandler}>Delete Formula</button>
                             </form>
                         </div>
                 }
